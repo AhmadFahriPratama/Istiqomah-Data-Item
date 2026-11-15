@@ -1,29 +1,31 @@
-# ISTIQOMAH DATA — Panduan Aplikasi (Windows & Android)
+# PANDUAN SINGKAT — ISTIQOMAH DATA (v2.4.0)
 
-**Istiqomah Data** adalah aplikasi **offline** untuk **Windows** dan **Android** yang mengolah file ekspor Excel/CSV/SQL/JSON data item dari **iPos 5** tanpa mengubah database asli iPos. Operasional kasir/penjualan toko tetap berjalan penuh di iPos.
+Aplikasi operasional retail eksternal **100% Offline** untuk mendampingi **iPos** pada **Windows Desktop** dan **Android**.
 
-## Fitur Utama
-1. **Sinkronisasi Penuh (Full Overwrite Catalog)**: Setiap impor/sync menimpa data katalog aktif dengan ekspor iPos terbaru secara penuh (membersihkan item/satuan usang agar terhindar dari bug sisa data) sambil tetap menjaga riwayat cetak, riwayat perubahan harga, order, retur, dan aturan toko.
-2. **Kontrol Laba & Level Harga Fleksibel (Level 1 – Level 6+)**: Mendukung hingga **6+ level harga iPos** serta **Satuan / multi-satuan** (`pcs`, `pak`, `isi 3`, `isi 4`), lengkap dengan lampu indikator warna (merah / kuning / hijau) dan ekspor PDF / Excel.
-3. **Order Supplier Ringkas & Penomoran File Harian (`-001/-002`)**: Mengelompokkan kebutuhan stok rendah/habis per prefix supplier (`ALMU`, `WRDA`, dll.) dengan **Ekspor Excel/PDF ringkas** (`No | Nama Barang | Qty | Satuan | Catatan` — tanpa Kode Item internal, tanpa harga, dan tanpa kolom TTD), nama file otomatis diakhiri tanggal & urutan harian (`...-2026-11-14-001.xlsx`, `-002.xlsx` jika order ulang di hari yang sama), serta teks WhatsApp siap kirim.
-4. **Cetak Tag Harga Bersih & Level Grosir Dapat Diatur**:
-   - Pengguna dapat memilih **Level Harga Ecer** (`Level 1–6`) dan **Level Harga Grosir** (`Nonaktif` atau `Level 2–6`) di menu **Pengaturan**.
-   - **Tag Harga Bersih**: Double border rapi menampilkan **Nama Produk**, **Harga Jual (`Rp.`)**, **Grosir kecil** (sesuai level pilihan, bila berbeda dari harga utama), dan **kode barcode teks saja** (tanpa gambar batang barcode; item tanpa barcode tidak menampilkan kode item).
-   - **Pilihan Kertas & Printer Fleksibel**: Mendukung **Thermal 58mm**, **Thermal 80mm**, **Kertas A4 Grid Multi-Kolom**, **Kertas A5**, **Kertas F4 / Folio**, **Stiker Label A4**, cetak langsung Printer Windows, ekspor PDF siap cetak, gambar PNG, ESC/POS Spooler/Serial/LAN, dan Bluetooth Android.
-5. **Retur Barang Banyak Item per Supplier**: Panel pilih banyak barang supplier sekaligus (`Pilih Terfilter` + edit `Qty Retur` + `+ Tambah Terpilih`) ke Draft Surat Jalan, filter riwayat & rekap per supplier/periode, serta laporan PDF / Excel.
+## 1. Instalasi & Menjalankan di Windows
+- **Menggunakan Installer (`Setup-IstiqomahData-v2.4.exe`)**:
+  Klik 2x file `Setup-IstiqomahData-v2.4.exe`, ikuti langkah instalasi hingga selesai (tanpa memerlukan koneksi internet atau .NET tambahan), lalu buka **Istiqomah Data** dari shortcut Desktop atau Start Menu.
+- **Menggunakan Paket Portable (`IstiqomahData-Portable-Windows.zip`)**:
+  Ekstrak seluruh isi ZIP ke folder mana saja, lalu klik 2x **`IstiqomahData.exe`**.
 
----
+## 2. Instalasi di Android (`IstiqomahData-Android.apk`)
+- Salin file **`IstiqomahData-Android.apk`** ke HP/Tablet Android (minimal Android 8.0 / API 26).
+- Buka file APK tersebut, izinkan instalasi dari sumber lokal bila diminta, lalu jalankan aplikasi **Istiqomah Data**.
 
-## Cara Instalasi & Menjalankan
-### Windows Desktop
-1. **Installer Resmi (`Setup-IstiqomahData-v2.3.exe`)**: Jalankan installer dan ikuti langkah pemasangan. Pintasan muncul di Desktop & Start Menu dan berjalan langsung sebagai aplikasi Desktop native (tanpa jendela CMD).
-2. **Portable Offline (`IstiqomahData-Portable-Windows.zip`)**: Ekstrak lalu jalankan `IstiqomahData.exe` di Windows 64-bit tanpa memerlukan internet atau instalasi .NET terpisah.
-
-### Android
-1. Unduh `IstiqomahData-Android.apk` lalu instal di HP/Tablet Android (Android 7.0+).
-2. Mendukung cetak langsung ke printer thermal Bluetooth 58mm/80mm, printer LAN, maupun ekspor PDF/PNG untuk kertas A4/A5/F4.
-
-- Database internal tersimpan lokal di `%LocalAppData%\IstiqomahData\istiqomah_data.db` (Windows) atau penyimpanan privat aplikasi (Android), serta dilengkapi **Backup & Restore** dan **Kunci PIN** di menu **Pengaturan**.
-
----
-*made by Fahri Pratama*
+## 3. Alur Operasional Harian (Pendamping iPos)
+1. **Impor Pertama Data iPos**:
+   - Ekspor daftar item dari iPos ke file Excel (`.xlsx` / `.xls` / `.csv`).
+   - Buka menu **Impor & Sinkron iPos**, pilih file Excel tersebut, atur jenis barang yang memakai Tag Harga, periksa prefix supplier, dan klik **Simpan**.
+2. **Sinkronisasi Berkala (Timpa Penuh & Histori Stok Otomatis)**:
+   - Setiap ada pembaruan harga/stok di iPos, cukup pilih file Excel terbaru. Sistem menimpa katalog lama secara bersih, mempertahankan histori perubahan harga & **histori perubahan stok (`stok_mutasi_log`)**, serta menganalisis pergerakan barang secara jujur tanpa mengklaim selisih stok sebagai penjualan.
+3. **Pengaturan Level Harga Grosir Fleksibel (Level 1 s/d 6)**:
+   - Di menu **Pengaturan**, Anda dapat memilih Level Harga Ecer dan Level Harga Grosir (Level 1 sampai Level 6) sesuai struktur harga di iPos toko Anda.
+4. **Cetak Tag Harga Bersih**:
+   - Hanya menampilkan **Nama Produk**, **Harga Jual (Rp.)**, **Harga Grosir (ukuran proporsional lebih kecil bila ada)**, dan **Teks Kode Barcode** (hanya jika produk memiliki kode barcode; kode item internal tidak ditampilkan pada tag).
+   - Mendukung ukuran kertas Thermal 58mm/80mm, A4, F4/Folio, Letter, A5, Label Sticker, dan Kustom.
+5. **Order Supplier, Multi-Supplier & Analisis Pergerakan Barang**:
+   - Mendukung **banyak supplier untuk satu produk** dan **perbandingan harga beli antar-supplier** secara langsung.
+   - Menampilkan **Histori Perubahan Stok & Analisis Pergerakan Barang** antar-impor secara jujur.
+   - Format ekspor Excel ringkas dan bersih (tanpa harga, tanpa kolom TTD, tanpa kode item internal) dengan penamaan otomatis `Order_<Supplier>_YYYY-MM-DD-001.xlsx` (`-002`, `-003` untuk pemesanan berikutnya di hari yang sama).
+6. **Retur Barang per Supplier**:
+   - Input banyak barang sekaligus untuk satu supplier menggunakan pencarian cepat & pemilihan masal di halaman **Retur Barang**.
