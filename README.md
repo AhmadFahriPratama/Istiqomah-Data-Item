@@ -1,22 +1,23 @@
-﻿# Istiqomah Data v2.4.0
+﻿# Istiqomah Data v2.5.0
 
-Aplikasi **100% offline** untuk **Windows Desktop** dan **Android** guna mengolah ekspor data item Excel / CSV / SQL / JSON dari **iPos 5** tanpa mengubah database asli iPos.
+Aplikasi operasional retail **100% offline** untuk **Windows Desktop** guna mengolah ekspor data item Excel / CSV / SQL / JSON dari **iPos 5** tanpa mengubah database asli iPos. *(Fokus penuh pada rilis Windows Desktop `win-x64`; target Android dijeda sementara).*
 
-## Fitur Utama
-- **Dashboard Sederhana & Jujur**: Menampilkan status kesiapan operasional yang bersih tanpa grafik berlebihan dan menampilkan status **`Data Belum Tersedia`** secara jujur saat belum ada file Excel iPos yang diimpor.
-- **Histori Perubahan Stok Permanen & Analisis Pergerakan Barang**: Mencatat riwayat perubahan stok (`stok_mutasi_log`) antar-impor secara permanen (tidak dihapus saat timpa penuh) dan menganalisis pergerakan barang secara jujur tanpa mengklaim selisih stok sebagai penjualan.
-- **Multi-Supplier & Perbandingan Harga Supplier per Produk**: Mendukung banyak supplier untuk satu produk (`item_supplier_harga`), menandai supplier **`TERMURAH`**, menghitung selisih harga, dan terintegrasi langsung dengan penyusunan Order Supplier.
-- **Sinkronisasi Penuh (Full Overwrite Catalog)**: Menimpa data katalog lama dengan file ekspor iPos terbaru secara menyeluruh sambil menjaga histori stok, riwayat cetak, perubahan harga, multi-supplier, order, dan retur.
-- **Kontrol Laba & Level Harga Fleksibel (Level 1 – Level 6+)**: Mendukung hingga **6+ level harga iPos** serta multi-satuan, dilengkapi indikator lampu merah/kuning/hijau, saran pembulatan harga jual, dan ekspor Excel / PDF.
-- **Order Supplier Ringkas & Urutan Harian `-001 / -002`**: Format Excel & PDF supplier yang bersih (`No | Nama Barang | Qty | Satuan | Catatan`) — tanpa Kode Item internal, tanpa kolom harga, dan tanpa kolom TTD — serta penamaan file Excel diakhiri tanggal dan nomor urut harian (`-yyyy-MM-dd-001.xlsx`, `-002.xlsx`, dst.).
-- **Retur Barang Massal Banyak Item per Supplier**: Pilih banyak barang supplier sekaligus (`Pilih Terfilter`, edit `Qty Retur`, `+ Tambah Terpilih`) ke Draft Surat Jalan Retur, plus pencarian riwayat & rekap supplier.
-- **Studio Tag Harga Bersih & Fleksibel**: Menampilkan **Nama Produk**, **Harga Jual (`Rp.`)**, **Grosir kecil** (sesuai level pilihan), dan **kode barcode teks saja** (tanpa gambar batang barcode; item tanpa barcode tidak menampilkan kode item).
-- **Printer & Kertas Lengkap**: Mendukung **Thermal 58mm**, **Thermal 80mm**, **Kertas A4 Grid**, **Kertas A5 Grid**, **Kertas F4 Grid**, **Stiker Label A4**, cetak langsung Printer Windows, ekspor PDF siap cetak, gambar PNG, ESC/POS, serta Bluetooth Android.
+## Fitur Utama (11 Modul Sidebar Desktop)
+- **Dashboard Ringkas & Jujur (`Dashboard`)**: Menampilkan 4 KPI utama, 1 grafik tren pergerakan stok antar impor, maksimal 5 aktivitas terbaru, pencarian cepat produk, dan status database lokal (`Data Belum Tersedia` saat belum ada impor).
+- **Impor & Sync iPos dengan Preview Pra-Simpan (`Impor & Sync iPos`)**: Mendukung `.xlsx`, `.xls`, `.csv`, `.sql`, dan `.json`. Menyediakan ringkasan validasi sebelum menyimpan (*Terbaca, Baru, Diperbarui, Tidak Berubah, Bermasalah, Duplikasi, Tidak Ditemukan*) dengan tombol **Simpan Pembaruan** atau **Batalkan** tanpa merusak database, ditambah animasi loading VSync halus `in-out` *"made by Fahri Pratama"*.
+- **Master Produk & Konflik Barcode (`Master Produk`)**: Katalog produk terpaginasi (`25/50/100/200`), filter Jenis & Supplier, panel detail varian/ukuran/warna/multi-satuan/level harga 1–6+/histori stok, serta inspeksi bentrok barcode tanpa penggabungan otomatis.
+- **Arus Barang Permanen (`Arus Barang`)**: Jejak audit `stok_mutasi_log` di setiap sinkronisasi tanpa dihapus saat timpa penuh (`TIDAK_DITEMUKAN_IMPOR`, tanpa menyamakan penurunan stok dengan penjualan kasir), lengkap dengan filter tanggal dan ekspor Excel/PDF.
+- **Product Performance (`Performa Produk`)**: Analisis perputaran barang antar-impor (*Perputaran Cepat, Sedang, Lambat*) terpisah dari Dashboard dengan label sumber data yang jujur.
+- **Multi-Supplier & Perbandingan Harga Setara Unit (`Multi-Supplier`)**: Mendukung banyak supplier per produk (`item_supplier_harga`) dengan normalisasi harga per unit dasar (`HargaBeli / IsiPerSatuan`), pencatatan `supplier_price_history`, dan pengelolaan `kode_item_supplier`.
+- **Kontrol Laba Akurat Margin% vs Markup% (`Kontrol Laba`)**: Memisahkan Margin terhadap Harga Jual dan Markup terhadap HPP, menandai harga beli `<= 0` tanpa persentase palsu, indikator lampu merah/kuning/hijau, dan rekomendasi pembulatan harga.
+- **Order Supplier Ringkas & Urutan Harian `-001 / -002` (`Order Supplier`)**: Menyusun order dengan kode katalog milik supplier terpilih dan mengekspor Excel ringkas tanpa harga, tanpa kolom TTD, dan tanpa kode item internal (`-yyyy-MM-dd-001.xlsx`, `-002.xlsx`, dst.).
+- **Studio Tag Harga Bersih (`Tag Harga`)**: Menampilkan Nama Produk, Harga Jual (`Rp.`), Harga Grosir proporsional sesuai konfigurasi Level 1–6+, dan teks kode barcode saja, mendukung A4, A5, F4, Stiker, dan Thermal 58mm/80mm.
+- **Retur Barang Massal & Rekap (`Retur Barang`)**: Input banyak barang sekaligus untuk satu supplier dengan opsi audit pengurangan stok terkonfirmasi `(RETUR_SUPPLIER)`.
+- **Pengaturan & Backup Tervalidasi (`Pengaturan`)**: Konfigurasi fleksibel Level Harga Ecer & Grosir (Level 1–6+), aturan jenis & prefix supplier, printer Windows, PIN, serta Backup/Restore SQLite bervalidasi integritas file.
 
-## Unduhan Resmi ([Releases v2.4.0](https://github.com/AhmadFahriPratama/Istiqomah-Data-Item/releases/tag/v2.4.0))
-- **`Setup-IstiqomahData-v2.4.exe`** — Installer resmi Windows 64-bit (bebas `Error Code 2`, Desktop & Start Menu).
+## Unduhan Resmi ([Releases v2.5.0](https://github.com/AhmadFahriPratama/Istiqomah-Data-Item/releases/tag/v2.5.0))
+- **`Setup-IstiqomahData-v2.5.exe`** — Installer resmi Windows 64-bit self-contained (bebas `Error Code 2`, membuat shortcut Desktop & Start Menu).
 - **`IstiqomahData-Portable-Windows.zip`** — Paket portabel Windows 64-bit self-contained.
-- **`IstiqomahData-Android.apk`** — Paket instalasi Android (`Android 7.0+`).
 
 Lihat [README-CARA-PAKAI.md](./README-CARA-PAKAI.md) untuk panduan penggunaan lengkap.
 
